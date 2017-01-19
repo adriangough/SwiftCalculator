@@ -9,12 +9,6 @@
 import Foundation
 
 
-func multiply(operator1: Double, operator2: Double) -> Double{
-    return operator1*operator2
-}
-
-
-
 
 class CalculatorBrain {
     private var accumulator = 0.0
@@ -41,8 +35,12 @@ class CalculatorBrain {
                       "π" : Operation.constant (M_PI),
                       "e" : Operation.constant (M_E),
                       "COS": Operation.unaryOperation (cos),
+                      "SIN": Operation.unaryOperation (sin),
                       "√": Operation.unaryOperation (sqrt),
-                      "✖️" : Operation.binaryOperation(multiply),
+                      "✖️" : Operation.binaryOperation({ $0*$1 }),
+                      "➗" : Operation.binaryOperation({ $0/$1 }),
+                      "➖" : Operation.binaryOperation({ $0-$1 }),
+                      "➕" : Operation.binaryOperation({ $0+$1 }),
                       "=" :Operation.equals
                                ] // This is a dictionary
     
