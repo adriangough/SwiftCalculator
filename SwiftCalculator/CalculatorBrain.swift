@@ -14,6 +14,7 @@ class CalculatorBrain {
     private var accumulator = 0.0
     
     func setOperand(operand: Double){
+        descriptionOfBrain (op: String(operand))
         accumulator = operand
         
     }
@@ -63,12 +64,20 @@ class CalculatorBrain {
             pending = nil
         }
     }
-
     
+    private var descriptionArray = [String]()
+
+    private func descriptionOfBrain(op:String){
+        if op != "=" || op != "..."  {
+            descriptionArray.append(op)
+            print ("\(descriptionArray)")
+        }
+        
+    }
     
     
     func performOperation(symbol: String){
-        
+        descriptionOfBrain(op: symbol)
         if let operation = operations[symbol]{
             switch operation {
             case Operation.constant(let associatedConstantValue): accumulator = associatedConstantValue
@@ -79,7 +88,7 @@ class CalculatorBrain {
     
             case .equals:
                 executePendingBinaryOperation()
-            
+                descriptionArray.removeAll()
             }
         }
         
@@ -88,6 +97,7 @@ class CalculatorBrain {
     var result: Double{
         get {
             return accumulator
+            
         }
     }
 
